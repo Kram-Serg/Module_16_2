@@ -6,21 +6,21 @@ app = FastAPI()
 
 
 @app.get('/')
-async def main_page() -> dict:
-    return {'message': 'Главная страница'}
+async def main_page():
+    return 'Главная страница'
 
 
 @app.get('/user/admin')
-async def admin_page() -> dict:
-    return {'message': 'Вы вошли как администратор'}
+async def admin_page():
+    return 'Вы вошли как администратор'
 
 
 @app.get('/user/{user_id}')
 async def user(user_id: Annotated[int, Path(ge=1,
                                             le=100,
                                             description='Enter User ID',
-                                            example='10')]) -> dict:
-    return {'message': f'Вы вошли как пользователь №{user_id}'}
+                                            example='10')]):
+    return f'Вы вошли как пользователь №{user_id}'
 
 
 @app.get('/user/{user_name}/{user_age}')
@@ -31,5 +31,5 @@ async def info_user(user_name: Annotated[str, Path(ge=5,
                     user_age: Annotated[int, Path(ge=18,
                                                   le=120,
                                                   description='Enter age',
-                                                  example='24')]) -> dict:
-    return {'message': f'Информация о пользователе. Имя: {user_name}, возраст: {user_age}'}
+                                                  example='24')]):
+    return f'Информация о пользователе. Имя: {user_name}, возраст: {user_age}'
